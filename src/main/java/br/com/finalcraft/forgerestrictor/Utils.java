@@ -1,12 +1,12 @@
-package net.kaikk.mc.fr;
-
-import java.util.Calendar;
-import java.util.TimeZone;
-import java.util.UUID;
+package br.com.finalcraft.forgerestrictor;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.UUID;
 
 public class Utils {
 	public static UUID toUUID(byte[] bytes) {

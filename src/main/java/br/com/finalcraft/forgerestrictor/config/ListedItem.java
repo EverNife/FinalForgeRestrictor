@@ -1,21 +1,21 @@
-package net.kaikk.mc.fr;
+package br.com.finalcraft.forgerestrictor.config;
 
 import org.bukkit.Material;
 
-class ListedItem {
-	Material material;
-	Short data;
-	String world;
-	
-	ListedItem(){}
-	
-	ListedItem(Material material, Short data, String world) {
+public class ListedItem {
+	public Material material;
+	public Short data;
+	public String world;
+
+	public ListedItem(){}
+
+	public ListedItem(Material material, Short data, String world) {
 		this.material = material;
 		this.data = data;
 		this.world = world;
 	}
-	
-	ListedItem(String serialized){
+
+	public ListedItem(String serialized){
 		String[] arr=serialized.split(":");
 		if (arr.length<1) {
 			throw new IllegalArgumentException();
@@ -29,17 +29,17 @@ class ListedItem {
 			}
 		}
 	}
-	
-	String serialize() {
+
+	public String serialize() {
 		return material+":"+(data==null&&world==null ? "" : (data==null ? ":*" : ":"+data)+(world==null ? "" : ":"+world));
 	}
-	
-	boolean match(Material material, Short data, String world) {
+
+	public boolean match(Material material, Short data, String world) {
 		boolean test = material==this.material && (this.data==null || this.data.equals(data)) && (this.world==null || this.world.equals(world));
 		return test;
 	}
-	
-	boolean equals(Material material, Short data, String world) {
+
+	public boolean equals(Material material, Short data, String world) {
 		boolean test = material==this.material && (this.data==data || (this.data!=null && this.data.equals(data))) && (this.world==world || (this.world!=null && this.world.equals(world)));
 		return test;
 	}

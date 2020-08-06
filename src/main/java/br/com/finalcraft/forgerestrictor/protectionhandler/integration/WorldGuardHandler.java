@@ -1,12 +1,6 @@
-package net.kaikk.mc.fr.protectionplugins;
+package br.com.finalcraft.forgerestrictor.protectionhandler.integration;
 
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
-
+import br.com.finalcraft.forgerestrictor.protectionhandler.ProtectionHandler;
 import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
@@ -14,8 +8,12 @@ import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag.State;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
-
-import net.kaikk.mc.fr.ProtectionHandler;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 
 public class WorldGuardHandler implements ProtectionHandler {
 	WorldGuardPlugin worldGuard;
@@ -101,7 +99,7 @@ public class WorldGuardHandler implements ProtectionHandler {
 	}
 	
 	protected void permissionDeniedMessage(Player player) {
-		player.sendMessage("ง4You don't have permission in this area.");
+		player.sendMessage("ยง4You don't have permission in this area.");
 	}
 
 	@Override

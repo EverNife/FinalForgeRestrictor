@@ -1,5 +1,9 @@
-package net.kaikk.mc.fr;
+package br.com.finalcraft.forgerestrictor.command;
 
+import br.com.finalcraft.forgerestrictor.ForgeRestrictor;
+import br.com.finalcraft.forgerestrictor.config.ListedItem;
+import br.com.finalcraft.forgerestrictor.config.ListedRangedItem;
+import br.com.finalcraft.forgerestrictor.protectionhandler.ProtectionPlugins;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -11,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class CommandExec implements CommandExecutor {
 	private ForgeRestrictor instance;
 	
-	CommandExec(ForgeRestrictor instance) {
+	public CommandExec(ForgeRestrictor instance) {
 		this.instance = instance;
 	}
 
@@ -126,7 +130,7 @@ public class CommandExec implements CommandExecutor {
 						if (this.instance.config.whitelist.size()==0) {
 							throw new IllegalArgumentException("Whitelist is empty");
 						}
-						sender.sendMessage("ง2ForgeRestrictor Whitelist\n(ItemName:Data [World])");
+						sender.sendMessage("ยง2ForgeRestrictor Whitelist\n(ItemName:Data [World])");
 						for (ListedItem listedItem : this.instance.config.whitelist) {
 							sender.sendMessage(listedItem.toString());
 						}
@@ -135,7 +139,7 @@ public class CommandExec implements CommandExecutor {
 						if (this.instance.config.ranged.size()==0) {
 							throw new IllegalArgumentException("Ranged item list is empty");
 						}
-						sender.sendMessage("ง2ForgeRestrictor Ranged item list\n(ItemName:Data (Range) [World])");
+						sender.sendMessage("ยง2ForgeRestrictor Ranged item list\n(ItemName:Data (Range) [World])");
 						for (ListedItem listedItem : this.instance.config.ranged) {
 							sender.sendMessage(listedItem.toString());
 						}
@@ -144,7 +148,7 @@ public class CommandExec implements CommandExecutor {
 						if (this.instance.config.aoe.size()==0) {
 							throw new IllegalArgumentException("AoE item list is empty");
 						}
-						sender.sendMessage("ง2ForgeRestrictor AoE item list\n(ItemName:Data (Range) [World])");
+						sender.sendMessage("ยง2ForgeRestrictor AoE item list\n(ItemName:Data (Range) [World])");
 						for (ListedItem listedItem : this.instance.config.aoe) {
 							sender.sendMessage(listedItem.toString());
 						}

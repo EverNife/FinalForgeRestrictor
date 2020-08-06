@@ -1,5 +1,7 @@
-package net.kaikk.mc.fr;
+package br.com.finalcraft.forgerestrictor.protectionhandler;
 
+import br.com.finalcraft.forgerestrictor.protectionhandler.integration.GriefPreventionPlusHandler;
+import br.com.finalcraft.forgerestrictor.protectionhandler.integration.WorldGuardHandler;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -13,8 +15,8 @@ import org.bukkit.entity.Player;
  * and make a pull request to add it to net.kaikk.mc.fr.protectionplugins
  * package. A proper name for a class that implements this interface is
  * [ProtectionPluginName]Handler, e.g., GriefPreventionPlusHandler 
- * @see net.kaikk.mc.fr.protectionplugins.GriefPreventionPlusHandler
- * @see net.kaikk.mc.fr.protectionplugins.WorldGuardHandler
+ * @see GriefPreventionPlusHandler
+ * @see WorldGuardHandler
  * */
 public interface ProtectionHandler {
 	/**

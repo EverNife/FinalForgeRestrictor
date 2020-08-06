@@ -1,9 +1,9 @@
-package net.kaikk.mc.fr;
+package br.com.finalcraft.forgerestrictor.protectionhandler;
+
+import br.com.finalcraft.forgerestrictor.protectionhandler.integration.GriefPreventionPlusHandler;
+import br.com.finalcraft.forgerestrictor.protectionhandler.integration.WorldGuardHandler;
 
 import java.util.Arrays;
-
-import net.kaikk.mc.fr.protectionplugins.GriefPreventionPlusHandler;
-import net.kaikk.mc.fr.protectionplugins.WorldGuardHandler;
 
 public enum ProtectionPlugins {
 	GriefPreventionPlus(GriefPreventionPlusHandler.class),
@@ -28,12 +28,12 @@ public enum ProtectionPlugins {
 		generateHandlersList();
 	}
 	
-	void createHandler() throws InstantiationException, IllegalAccessException {
+	public void createHandler() throws InstantiationException, IllegalAccessException {
 		this.handler = this.clazz.newInstance();
 		generateHandlersList();
 	}
 	
-	void removeHandler() {
+	public void removeHandler() {
 		this.handler = null;
 		generateHandlersList();
 	}

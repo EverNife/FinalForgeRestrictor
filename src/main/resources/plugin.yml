@@ -1,7 +1,7 @@
-name: ${project.artifactId}
-main: ${package}.${project.artifactId}
-version: ${project.version}
-author: ${developer}
+name: ForgeRestrictor
+main: br.com.finalcraft.forgerestrictor.ForgeRestrictor
+version: 1.3.5
+author: KaiNoMood
 loadbefore: [GriefPreventionPlus, WorldGuard]
 
 commands:

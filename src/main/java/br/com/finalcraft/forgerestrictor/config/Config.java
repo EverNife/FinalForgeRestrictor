@@ -1,4 +1,10 @@
-package net.kaikk.mc.fr;
+package br.com.finalcraft.forgerestrictor.config;
+
+import br.com.finalcraft.forgerestrictor.ForgeRestrictor;
+import br.com.finalcraft.forgerestrictor.protectionhandler.ProtectionPlugins;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,30 +12,26 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-class Config {
+public class Config {
 	final static String configFilePath = "plugins" + File.separator + "ForgeRestrictor" + File.separator + "config.yml";
 	private File configFile;
-	FileConfiguration config;
-	
-	List<ListedItem> whitelist;
-	List<ListedRangedItem> ranged;
-	List<ListedRangedItem> aoe;
+	public FileConfiguration config;
 
-	int confiscateTicks;
-	
-	boolean confiscateLog;
-	
-	Config() {
+	public List<ListedItem> whitelist;
+	public List<ListedRangedItem> ranged;
+	public List<ListedRangedItem> aoe;
+
+	public int confiscateTicks;
+
+	public boolean confiscateLog;
+
+	public Config() {
 		this.configFile = new File(configFilePath);
 		this.config = YamlConfiguration.loadConfiguration(this.configFile);
 		this.load();
 	}
 
-	void load() {
+	public void load() {
 		ProtectionPlugins.GriefPreventionPlus.setEnabled(this.config.getBoolean("Protection.GriefPreventionPlus", true));
 		ProtectionPlugins.WorldGuard.setEnabled(this.config.getBoolean("Protection.WorldGuard", true));
 		
@@ -65,8 +67,8 @@ class Config {
 		
 		this.save();
 	}
-	
-	void save() {
+
+	public void save() {
 		try {
 			this.config.set("Protection.GriefPreventionPlus", ProtectionPlugins.GriefPreventionPlus.isEnabled());
 			this.config.set("Protection.WorldGuard", ProtectionPlugins.WorldGuard.isEnabled());
@@ -83,32 +85,32 @@ class Config {
 			e.printStackTrace();
 		}
 	}
-	
-	void addWhitelistItem(ListedItem item) {
+
+	public void addWhitelistItem(ListedItem item) {
 		this.whitelist.add(item);
 		this.save();
 	}
-	
-	void addRangedItem(ListedRangedItem item) {
+
+	public void addRangedItem(ListedRangedItem item) {
 		this.ranged.add(item);
 		this.save();
 	}
-	
-	void addAoEItem(ListedRangedItem item) {
+
+	public void addAoEItem(ListedRangedItem item) {
 		this.aoe.add(item);
 		this.save();
 	}
-	
-	ListedItem getWhitelistItem(Material material, Short data, String world) {
+
+	public ListedItem getWhitelistItem(Material material, Short data, String world) {
 		ForgeRestrictor.getInstance().getLogger().info("getWhitelistItem");
 		return getListedItem(this.whitelist, material, data, world);
 	}
-	
-	ListedRangedItem getRangedItem(Material material, Short data, String world) {
+
+	public ListedRangedItem getRangedItem(Material material, Short data, String world) {
 		return (ListedRangedItem) getListedItem(this.ranged, material, data, world);
 	}
 	
-	ListedRangedItem getAoEItem(Material material, Short data, String world) {
+	public ListedRangedItem getAoEItem(Material material, Short data, String world) {
 		return (ListedRangedItem) getListedItem(this.aoe, material, data, world);
 	}
 	
@@ -120,17 +122,17 @@ class Config {
 		}
 		return null;
 	}
-	
-	
-	ListedItem matchWhitelistItem(Material material, Short data, String world) {
+
+
+	public ListedItem matchWhitelistItem(Material material, Short data, String world) {
 		return matchListedItem(this.whitelist, material, data, world);
 	}
-	
-	ListedRangedItem matchRangedItem(Material material, Short data, String world) {
+
+	public ListedRangedItem matchRangedItem(Material material, Short data, String world) {
 		return (ListedRangedItem) matchListedItem(this.ranged, material, data, world);
 	}
-	
-	ListedRangedItem matchAoEItem(Material material, Short data, String world) {
+
+	public ListedRangedItem matchAoEItem(Material material, Short data, String world) {
 		return (ListedRangedItem) matchListedItem(this.aoe, material, data, world);
 	}
 	
@@ -144,13 +146,13 @@ class Config {
 	}
 	
 	
-	boolean removeWhitelistItem(Material material, Short data, String world) {
+	public boolean removeWhitelistItem(Material material, Short data, String world) {
 		return removeListedItem(this.whitelist, material, data, world);
 	}
-	boolean removeRangedItem(Material material, Short data, String world) {
+	public boolean removeRangedItem(Material material, Short data, String world) {
 		return removeListedItem(this.ranged, material, data, world);
 	}
-	boolean removeAoEItem(Material material, Short data, String world) {
+	public boolean removeAoEItem(Material material, Short data, String world) {
 		return removeListedItem(this.aoe, material, data, world);
 	}
 	

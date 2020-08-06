@@ -1,16 +1,15 @@
-package net.kaikk.mc.fr.protectionplugins;
+package br.com.finalcraft.forgerestrictor.protectionhandler.integration;
 
+import br.com.finalcraft.forgerestrictor.protectionhandler.ProtectionHandler;
+import net.kaikk.mc.gpp.Claim;
+import net.kaikk.mc.gpp.DataStore;
+import net.kaikk.mc.gpp.GriefPreventionPlus;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
-
-import net.kaikk.mc.fr.ProtectionHandler;
-import net.kaikk.mc.gpp.Claim;
-import net.kaikk.mc.gpp.DataStore;
-import net.kaikk.mc.gpp.GriefPreventionPlus;
 
 
 public class GriefPreventionPlusHandler implements ProtectionHandler {

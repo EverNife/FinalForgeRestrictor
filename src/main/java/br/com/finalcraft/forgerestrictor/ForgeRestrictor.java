@@ -1,13 +1,17 @@
-package net.kaikk.mc.fr;
+package br.com.finalcraft.forgerestrictor;
 
+import br.com.finalcraft.forgerestrictor.command.CommandExec;
+import br.com.finalcraft.forgerestrictor.config.Config;
+import br.com.finalcraft.forgerestrictor.listener.EventListener;
+import br.com.finalcraft.forgerestrictor.protectionhandler.ProtectionPlugins;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ForgeRestrictor extends JavaPlugin {
 	private static ForgeRestrictor instance;
-	Config config;
+	public Config config;
 	EventListener eventListener;
-	CommandExec commandExec;
+	public CommandExec commandExec;
 
 	@Override
 	public void onEnable() {

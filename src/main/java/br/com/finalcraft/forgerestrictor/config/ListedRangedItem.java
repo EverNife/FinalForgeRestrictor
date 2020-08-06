@@ -1,19 +1,19 @@
-package net.kaikk.mc.fr;
+package br.com.finalcraft.forgerestrictor.config;
+
+import org.bukkit.Material;
 
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.bukkit.Material;
+public class ListedRangedItem extends ListedItem {
+	public int range;
 
-class ListedRangedItem extends ListedItem {
-	int range;
-	
-	ListedRangedItem(Material material, Short data, String world, int range) {
+	public ListedRangedItem(Material material, Short data, String world, int range) {
 		super(material, data, world);	
 		this.range=range;
 	}
-	
-	ListedRangedItem(Map<String, Object> map) {
+
+	public ListedRangedItem(Map<String, Object> map) {
 		for (Entry<String, Object> entry : map.entrySet()) {
 			switch(entry.getKey()) {
 			case "material":
@@ -31,8 +31,8 @@ class ListedRangedItem extends ListedItem {
 			}
 		}
 	}
-	
-	ListedRangedItem(String serialized) {
+
+	public ListedRangedItem(String serialized) {
 		String[] arr=serialized.split(":");
 		if (arr.length<2) {
 			throw new IllegalArgumentException();
@@ -48,8 +48,8 @@ class ListedRangedItem extends ListedItem {
 			}
 		}
 	}
-	
-	String serialize() {
+
+	public String serialize() {
 		return material+":"+range+(data==null&&world==null ? "" : (data==null ? ":*" : ":"+data)+(world==null ? "" : ":"+world));
 	}
 	

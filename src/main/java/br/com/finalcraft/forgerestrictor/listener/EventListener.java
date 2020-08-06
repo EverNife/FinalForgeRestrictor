@@ -1,8 +1,12 @@
-package net.kaikk.mc.fr;
+package br.com.finalcraft.forgerestrictor.listener;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
+import br.com.finalcraft.forgerestrictor.ForgeRestrictor;
+import br.com.finalcraft.forgerestrictor.Utils;
+import br.com.finalcraft.forgerestrictor.config.ConfiscatedInventory;
+import br.com.finalcraft.forgerestrictor.config.ListedRangedItem;
+import br.com.finalcraft.forgerestrictor.protectionhandler.ProtectionHandler;
+import br.com.finalcraft.forgerestrictor.protectionhandler.ProtectionPlugins;
+import net.kaikk.mc.gpp.GriefPreventionPlus;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -29,16 +33,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockIterator;
 
-import net.kaikk.mc.gpp.GriefPreventionPlus;
+import java.util.ArrayList;
+import java.util.UUID;
 
-class EventListener implements Listener {
+public class EventListener implements Listener {
 	private ForgeRestrictor instance;
 	static ArrayList<ConfiscatedInventory> confiscatedInventories;
 	private UUID lastConfiscationUUID;
 	private long lastConfiscationTime;
 	private Material lastConfiscationMaterial;
 
-	EventListener(ForgeRestrictor instance) {
+	public EventListener(ForgeRestrictor instance) {
 		this.instance = instance;
 	}
 
@@ -229,7 +234,7 @@ class EventListener implements Listener {
 		this.pluginEnable(event.getPlugin().getName());
 	}
 
-	void pluginEnable(String pluginName) {
+	public void pluginEnable(String pluginName) {
 		ProtectionPlugins protectionPlugin;
 		try {
 			protectionPlugin = ProtectionPlugins.valueOf(pluginName);
@@ -308,7 +313,7 @@ class EventListener implements Listener {
 		}
 		
 		if (this.instance.config.confiscateLog && (!player.getUniqueId().equals(lastConfiscationUUID) || player.getItemInHand().getType() != lastConfiscationMaterial || (System.currentTimeMillis()-lastConfiscationTime)>5000)) {
-			this.instance.getLogger().info(player.getName()+"'s inventory has been confiscated for "+ticks+" ticks. Location: "+Utils.locationToString(player.getLocation())+" - ItemInHand: "+player.getItemInHand());
+			this.instance.getLogger().info(player.getName()+"'s inventory has been confiscated for "+ticks+" ticks. Location: "+ Utils.locationToString(player.getLocation())+" - ItemInHand: "+player.getItemInHand());
 			lastConfiscationUUID = player.getUniqueId();
 			lastConfiscationTime = System.currentTimeMillis();
 			lastConfiscationMaterial = player.getItemInHand().getType();
