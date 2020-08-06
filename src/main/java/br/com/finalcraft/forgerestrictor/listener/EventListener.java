@@ -277,11 +277,11 @@ public class EventListener implements Listener {
 		}
 	}
 	
-	void confiscateInventory(Player player) {
+	public void confiscateInventory(Player player) {
 		confiscateInventory(player, this.instance.config.confiscateTicks);
 	}
 
-	void confiscateInventory(Player player, int ticks) {
+	public void confiscateInventory(Player player, int ticks) {
 		if (ticks<1) {
 			return;
 		}

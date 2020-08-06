@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ForgeRestrictor extends JavaPlugin {
 	private static ForgeRestrictor instance;
 	public Config config;
-	EventListener eventListener;
+	public EventListener eventListener;
 	public CommandExec commandExec;
 
 	@Override

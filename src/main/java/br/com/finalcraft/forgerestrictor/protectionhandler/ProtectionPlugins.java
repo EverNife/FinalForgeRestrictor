@@ -1,14 +1,16 @@
 package br.com.finalcraft.forgerestrictor.protectionhandler;
 
 import br.com.finalcraft.forgerestrictor.protectionhandler.integration.GriefPreventionPlusHandler;
+import br.com.finalcraft.forgerestrictor.protectionhandler.integration.PlotSquaredHandler;
 import br.com.finalcraft.forgerestrictor.protectionhandler.integration.WorldGuardHandler;
 
 import java.util.Arrays;
 
 public enum ProtectionPlugins {
 	GriefPreventionPlus(GriefPreventionPlusHandler.class),
-	WorldGuard(WorldGuardHandler.class);
-	
+	WorldGuard(WorldGuardHandler.class),
+	PlotSquared(PlotSquaredHandler.class);
+
 	private Class<? extends ProtectionHandler> clazz;
 	private ProtectionHandler handler;
 	private boolean enabled=true;
