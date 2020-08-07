@@ -3,12 +3,14 @@ package br.com.finalcraft.forgerestrictor.config;
 import br.com.finalcraft.forgerestrictor.ForgeRestrictor;
 import br.com.finalcraft.forgerestrictor.protectionhandler.ProtectionPlugins;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class Config {
 	public List<ListedItem> whitelist;
 	public List<ListedRangedItem> ranged;
 	public List<ListedRangedItem> aoe;
+	public HashSet<String> enabledWorlds;
+	private boolean allWorlds = true;
 
 	public int confiscateTicks;
 
@@ -34,7 +38,8 @@ public class Config {
 	public void load() {
 		ProtectionPlugins.GriefPreventionPlus.setEnabled(this.config.getBoolean("Protection.GriefPreventionPlus", true));
 		ProtectionPlugins.WorldGuard.setEnabled(this.config.getBoolean("Protection.WorldGuard", true));
-		
+		ProtectionPlugins.PlotSquared.setEnabled(this.config.getBoolean("Protection.PlotSquared", true));
+
 		this.whitelist=new ArrayList<ListedItem>();
 		for (String serialized : this.config.getStringList("Whitelist")) {
 			try {
@@ -61,7 +66,13 @@ public class Config {
 				ForgeRestrictor.getInstance().getLogger().warning("Invalid AoE element in config: "+serialized);
 			}
 		}
-		
+
+		this.enabledWorlds = new HashSet<>(this.config.getStringList("EnabledWorlds"));
+		if (enabledWorlds.size() == 0){
+			enabledWorlds.add("*");
+		}
+		this.allWorlds = enabledWorlds.contains("*");
+
 		this.confiscateTicks = this.config.getInt("ConfiscateTicks", 3);
 		this.confiscateLog = this.config.getBoolean("ConfiscateLog", true);
 		
@@ -76,7 +87,8 @@ public class Config {
 			this.config.set("Whitelist", serializeListedItemList(this.whitelist));
 			this.config.set("Ranged", serializeListedItemList(this.ranged));
 			this.config.set("AoE", serializeListedItemList(this.aoe));
-			
+			this.config.set("EnabledWorlds", new ArrayList<>(enabledWorlds));
+
 			this.config.set("ConfiscateTicks", this.confiscateTicks);
 			this.config.set("ConfiscateLog", this.confiscateLog);
 			
@@ -99,6 +111,11 @@ public class Config {
 	public void addAoEItem(ListedRangedItem item) {
 		this.aoe.add(item);
 		this.save();
+	}
+
+	public boolean isWorldEnabled(World world){
+		if (allWorlds) return true;
+		return enabledWorlds.contains(world.getName());
 	}
 
 	public ListedItem getWhitelistItem(Material material, Short data, String world) {

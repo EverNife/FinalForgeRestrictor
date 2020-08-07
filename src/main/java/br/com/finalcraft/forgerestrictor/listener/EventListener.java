@@ -57,6 +57,10 @@ public class EventListener implements Listener {
 		final Player player = event.getPlayer();
 		Block block = event.getClickedBlock();
 
+		if (!instance.config.isWorldEnabled(player.getWorld())){
+			return;
+		}
+
 		ItemStack item = event.getItem();
 		if (item==null) {
 			item = player.getItemInHand();
@@ -133,6 +137,10 @@ public class EventListener implements Listener {
 		if (event.getDamager().getType()==EntityType.PLAYER) {
 			final Player damager = (Player) event.getDamager();
 
+			if (!instance.config.isWorldEnabled(damager.getWorld())){
+				return;
+			}
+
 			if (damager.getName().startsWith("[")) {
 				return;
 			}
@@ -152,6 +160,11 @@ public class EventListener implements Listener {
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
 	public void onBlockPlace(BlockPlaceEvent event) {
 		final Player player = event.getPlayer();
+
+		if (!instance.config.isWorldEnabled(player.getWorld())){
+			return;
+		}
+
 		if (player.getName().startsWith("[")) {
 			return;
 		}
@@ -181,6 +194,9 @@ public class EventListener implements Listener {
 		if (entity instanceof Projectile) {
 			final Projectile projectile = (Projectile) entity;
 			if (projectile.getShooter() instanceof Player) {
+				if (!instance.config.isWorldEnabled(projectile.getLocation().getWorld())){
+					return;
+				}
 				if (this.projectileCheck(projectile, projectile.getLocation())) {
 					event.setCancelled(true);
 					event.setRadius(0);
@@ -195,6 +211,9 @@ public class EventListener implements Listener {
 		final Projectile projectile = event.getEntity();
 		if (projectile.getShooter() instanceof Player) {
 			final Player player = (Player) projectile.getShooter();
+			if (!instance.config.isWorldEnabled(player.getWorld())){
+				return;
+			}
 			Block targetBlock = getTargetBlock(player, 100); // TODO max distance to config
 
 			if (targetBlock==null) { 
@@ -214,6 +233,9 @@ public class EventListener implements Listener {
 		final Projectile projectile = event.getEntity();
 
 		if (projectile.getShooter() instanceof Player) {
+			if (!instance.config.isWorldEnabled(projectile.getLocation().getWorld())){
+				return;
+			}
 			this.projectileCheck(projectile, projectile.getLocation());
 		}
 	}
