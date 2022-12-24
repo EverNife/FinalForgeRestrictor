@@ -1,15 +1,6 @@
-name: ForgeRestrictor
-main: br.com.finalcraft.forgerestrictor.ForgeRestrictor
-version: 1.5.1a
-author: [KaiNoMood, EverNife]
-loadbefore: [GriefPreventionPlus, WorldGuard, PlotSquared]
-
-commands:
-   forgerestrictor:
-      description: Manage
-      aliases: [fr, fres]
-
-permissions:
-    forgerestrictor.manage:
-        description: Manage
-        default: op
+name: FinalForgeRestrictor
+main: br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor
+version: 2.0.1
+author: [EverNife]
+depend: [EverNifeCore]
+api-version: 1.13

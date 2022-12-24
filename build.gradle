@@ -8,7 +8,7 @@ buildscript {
 }
 
 group 'br.com.finalcraft'
-version '1.5.1a'
+version '2.0.1'
 
 apply plugin: 'java'
 
@@ -26,15 +26,22 @@ repositories {
         name = 'spigotmc-repo'
         url = 'https://hub.spigotmc.org/nexus/content/groups/public/'
     }
+    maven {
+        url = 'https://maven.petrus.dev/public'
+    }
 }
 
 dependencies {
-    compile name: "GriefPreventionPlus-13.4"
-    compile name: "worldguard-6.2.1"
-    compile name: "worldedit-bukkit-6.1.7.3"
-    compile name: "PlotSquared-Bukkit-20.03.28-71943e6-796"
+    compileOnly 'br.com.finalcraft:EverNifeCore:2.0.3'
 
-    compile 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
+    compileOnly name: "GriefPreventionPlus-13.4"
+    compileOnly name: "worldguard-bukkit-7.0.5-dist"    //Up to 1.16
+    compileOnly name: "worldedit-bukkit-7.2.5-dist"     //Up to 1.16
+    compileOnly name: "PlotSquared-Bukkit-20.03.28-71943e6-796"
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+    compileOnly group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    compileOnly group: 'commons-io', name: 'commons-io', version: '2.6' //Necessary for ReflectionUtils
+
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
