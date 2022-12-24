@@ -42,8 +42,8 @@ public class CMDForgeRestrict {
     @FinalCMD.SubCMD(
             subcmd = {"addHand"},
             locales = {
-                    @FCLocale(lang = LocaleType.PT_BR, text = "§bAdiciona o item da mão à alista específicada!"),
-                    @FCLocale(lang = LocaleType.EN_US, text = "§bAdd HeldItem to the specified restricted items list!"),
+                    @FCLocale(lang = LocaleType.PT_BR, text = "Adiciona o item da mão à alista específicada!"),
+                    @FCLocale(lang = LocaleType.EN_US, text = "Add HeldItem to the specified restricted items list!"),
             },
             permission = PermissionNodes.COMMAND_ADDHAND
     )
@@ -86,8 +86,8 @@ public class CMDForgeRestrict {
     @FinalCMD.SubCMD(
             subcmd = {"list"},
             locales = {
-                    @FCLocale(lang = LocaleType.PT_BR, text = "§bLista todos os itens restritos!"),
-                    @FCLocale(lang = LocaleType.EN_US, text = "§bList all restricted items!"),
+                    @FCLocale(lang = LocaleType.PT_BR, text = "Lista todos os itens restritos!"),
+                    @FCLocale(lang = LocaleType.EN_US, text = "List all restricted items!"),
             },
             permission = PermissionNodes.COMMAND_LIST
     )
@@ -119,7 +119,8 @@ public class CMDForgeRestrict {
     @FinalCMD.SubCMD(
             subcmd = {"reload"},
             locales = {
-                    @FCLocale(lang = LocaleType.PT_BR, text = "Recarrega o Plguin!")
+                    @FCLocale(lang = LocaleType.PT_BR, text = "Recarrega o Plguin!"),
+                    @FCLocale(lang = LocaleType.EN_US, text = "Reloads the Plguin!")
             },
             permission = PermissionNodes.COMMAND_RELOAD
     )
