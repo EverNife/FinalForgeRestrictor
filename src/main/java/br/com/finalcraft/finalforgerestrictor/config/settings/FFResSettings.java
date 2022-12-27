@@ -5,6 +5,7 @@ import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
 import br.com.finalcraft.finalforgerestrictor.config.ConfigManager;
 import br.com.finalcraft.finalforgerestrictor.config.restricteditem.RestrictedItem;
 import br.com.finalcraft.finalforgerestrictor.config.restricteditem.RestrictionType;
+import br.com.finalcraft.finalforgerestrictor.logging.FFRDebugModule;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.bukkit.Material;
@@ -78,6 +79,7 @@ public class FFResSettings {
 					continue;
 				}
 
+				FinalForgeRestrictor.getLog().debugModule(FFRDebugModule.ITEM_REGISTRATION, "(%s) Adding restricted item: [%s]", type.getKey(), newRestrictedItem.serialize());
 				RESTRICTED_ITEMS.put(newRestrictedItem.getMaterial(), newRestrictedItem);
 			}catch (Exception e){
 				FinalForgeRestrictor.getLog().warning("Failed to load RestrictedItem from: " + section);
