@@ -1,10 +1,7 @@
 package br.com.finalcraft.finalforgerestrictor.config;
 
 import br.com.finalcraft.evernifecore.config.Config;
-import br.com.finalcraft.evernifecore.locale.FCLocaleManager;
-import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
 import br.com.finalcraft.finalforgerestrictor.config.settings.FFResSettings;
-import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionPlugins;
 import org.bukkit.plugin.java.JavaPlugin;
 

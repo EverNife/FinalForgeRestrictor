@@ -1,6 +1,8 @@
 package br.com.finalcraft.finalforgerestrictor.protectionhandler;
 
-import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.*;
+import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.GriefPreventionPlusHandler;
+import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.PlotSquaredHandler;
+import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.WorldGuardHandler;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;

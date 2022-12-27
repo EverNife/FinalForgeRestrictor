@@ -5,7 +5,6 @@ import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
 import br.com.finalcraft.finalforgerestrictor.config.ConfigManager;
 import br.com.finalcraft.finalforgerestrictor.config.restricteditem.RestrictedItem;
 import br.com.finalcraft.finalforgerestrictor.config.restricteditem.RestrictionType;
-import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionPlugins;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.bukkit.Material;
@@ -57,7 +56,7 @@ public class FFResSettings {
 
 		for (RestrictionType type : RestrictionType.values()) {
 			long count = RESTRICTED_ITEMS.values().stream().filter(restrictedItem -> restrictedItem.getType() == type).count();
-			FinalForgeRestrictor.info(String.format("[%s] Loaded %s restricted item(s)!", type.getKey(), count));
+			FinalForgeRestrictor.getLog().info(String.format("[%s] Loaded %s restricted item(s)!", type.getKey(), count));
 		}
 
 		ConfigManager.getMainConfig().saveIfNewDefaults();
@@ -74,15 +73,15 @@ public class FFResSettings {
 				//Check if this was already not registered on the other list
 				RestrictedItem existing = getRestrictedItem(newRestrictedItem.getItemStack());
 				if (existing != null){
-					FinalForgeRestrictor.warning("There Item [" + serializedItemWithRange + "] is already restricted under the list: " + existing.getType());
-					FinalForgeRestrictor.warning("Ignoring the new one from the list <" + type + "> at line: " + line);
+					FinalForgeRestrictor.getLog().warning("There Item [" + serializedItemWithRange + "] is already restricted under the list: " + existing.getType());
+					FinalForgeRestrictor.getLog().warning("Ignoring the new one from the list <" + type + "> at line: " + line);
 					continue;
 				}
 
 				RESTRICTED_ITEMS.put(newRestrictedItem.getMaterial(), newRestrictedItem);
 			}catch (Exception e){
-				FinalForgeRestrictor.warning("Failed to load RestrictedItem from: " + section);
-				FinalForgeRestrictor.warning("Line [" + line + "]  -->   " + serializedItemWithRange);
+				FinalForgeRestrictor.getLog().warning("Failed to load RestrictedItem from: " + section);
+				FinalForgeRestrictor.getLog().warning("Line [" + line + "]  -->   " + serializedItemWithRange);
 				e.printStackTrace();
 			}
 		}

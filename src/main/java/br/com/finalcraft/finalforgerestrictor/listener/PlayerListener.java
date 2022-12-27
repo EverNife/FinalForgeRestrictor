@@ -10,6 +10,7 @@ import br.com.finalcraft.finalforgerestrictor.config.settings.FFResSettings;
 import br.com.finalcraft.finalforgerestrictor.confiscation.ConfiscationManager;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionPlugins;
+import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import net.kaikk.mc.gpp.GriefPreventionPlus;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -76,6 +77,13 @@ public class PlayerListener implements ECListener {
 		// ignore investigation tool on GPP
 		if (ProtectionPlugins.GriefPreventionPlus != null){
 			if (heldItem.getType() == GriefPreventionPlus.getInstance().config.claims_investigationTool) {
+				return;
+			}
+		}
+
+		// ignore investigation tool on GP
+		if (ProtectionPlugins.GriefPrevention != null){
+			if (heldItem.getType() == GriefPrevention.instance.config_claims_investigationTool) {
 				return;
 			}
 		}

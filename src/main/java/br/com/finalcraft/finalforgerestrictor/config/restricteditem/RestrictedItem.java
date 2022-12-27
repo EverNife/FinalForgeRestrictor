@@ -2,11 +2,9 @@ package br.com.finalcraft.finalforgerestrictor.config.restricteditem;
 
 import br.com.finalcraft.evernifecore.util.FCInputReader;
 import br.com.finalcraft.evernifecore.util.FCItemUtils;
-import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class RestrictedItem {

@@ -34,6 +34,7 @@ repositories {
 dependencies {
     compileOnly 'br.com.finalcraft:EverNifeCore:2.0.3'
 
+    compileOnly name: "GriefPrevention-16.17.1"
     compileOnly name: "GriefPreventionPlus-13.4"
     compileOnly name: "worldguard-bukkit-7.0.5-dist"    //Up to 1.16
     compileOnly name: "worldedit-bukkit-7.2.5-dist"     //Up to 1.16

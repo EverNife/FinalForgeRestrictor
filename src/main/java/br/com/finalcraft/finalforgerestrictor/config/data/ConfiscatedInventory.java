@@ -25,7 +25,7 @@ public class ConfiscatedInventory {
 				this.player.getInventory().setContents(this.confiscatedItems);
 				this.hasBeenRestored = true;
 			} else {
-				FinalForgeRestrictor.warning("Couldn't restore " + this.player.getName() + "'s confiscated inventory, content: " + this.inventoryContent());
+				FinalForgeRestrictor.getLog().warning("Couldn't restore " + this.player.getName() + "'s confiscated inventory, content: " + this.inventoryContent());
 			}
 		}
 	}
