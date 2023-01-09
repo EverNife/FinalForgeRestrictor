@@ -3,6 +3,7 @@ package br.com.finalcraft.finalforgerestrictor.config.restricteditem;
 import br.com.finalcraft.evernifecore.util.FCInputReader;
 import br.com.finalcraft.evernifecore.util.FCItemUtils;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.regex.Pattern;
@@ -45,6 +46,10 @@ public class RestrictedItem {
 
 	public boolean match(ItemStack itemStack) {
 		return itemStack.getType() == this.material && (this.damageValue == null || this.damageValue == itemStack.getDurability());
+	}
+
+	public boolean match(Block block) {
+		return block.getType() == this.material && (this.damageValue == null || this.damageValue == block.getData());
 	}
 
 	public String serialize(){
