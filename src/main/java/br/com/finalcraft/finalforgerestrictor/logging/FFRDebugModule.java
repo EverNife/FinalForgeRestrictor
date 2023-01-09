@@ -4,13 +4,21 @@ import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 
 public enum FFRDebugModule implements IDebugModule {
     ITEM_REGISTRATION("Log each item Registration!"),
+    WORLD_GUARD("Debug related to WorldGuard!", false),
     ;
 
-    private String comment;
+    private final String comment;
+    private final boolean enabledByDefault;
     private boolean enabled = true;
 
     FFRDebugModule(String comment) {
         this.comment = comment;
+        this.enabledByDefault = false;
+    }
+
+    FFRDebugModule(String comment, boolean enabledByDefault) {
+        this.comment = comment;
+        this.enabledByDefault = enabledByDefault;
     }
 
     @Override
@@ -21,6 +29,11 @@ public enum FFRDebugModule implements IDebugModule {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    @Override
+    public boolean isEnabledByDefault() {
+        return enabledByDefault;
     }
 
     @Override
