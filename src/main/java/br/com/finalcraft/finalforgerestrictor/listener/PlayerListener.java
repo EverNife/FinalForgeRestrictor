@@ -34,6 +34,42 @@ import org.bukkit.inventory.ItemStack;
 
 public class PlayerListener implements ECListener {
 
+	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+	public void onPlayerInteractBlock(PlayerInteractEvent event) {
+
+		// ignore stepping into a block
+		if (event.getAction() == Action.PHYSICAL) {
+			return;
+		}
+
+		final Player player = event.getPlayer();
+		final Block block = event.getClickedBlock();
+
+		if (block == null){
+			return;
+		}
+
+		if (!FFResSettings.isWorldEnabled(player.getWorld())){
+			return;
+		}
+
+		//Ignore if the player has correct permission
+		if (player.hasPermission(PermissionNodes.BYPASS_RESTRICTIONS)){
+			return;
+		}
+
+		for (ProtectionHandler protection : ProtectionPlugins.getHandlers()) {
+			if (!protection.canOpenContainer(player, block)) {
+				event.setUseInteractedBlock(Result.DENY);
+				event.setUseItemInHand(Result.DENY);
+				event.setCancelled(true);
+				ConfiscationManager.confiscateInventory(player);
+				return;
+			}
+		}
+
+	}
+
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
 	public void onPlayerInteract(PlayerInteractEvent event) {
 
