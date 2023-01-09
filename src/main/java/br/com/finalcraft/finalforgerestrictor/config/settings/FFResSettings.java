@@ -10,6 +10,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nullable;
@@ -54,6 +55,13 @@ public class FFResSettings {
 				"Items that cause damage around the player!" +
 						"\nItems like Hammers, twilight Horns, etc!"
 		);
+
+//		loadRestrictedItems(
+//				RestrictionType.BLOCK_INTERACT,
+//				"Blocks that the player should not be able to interact!" +
+//						"\nNot even with their bare hands! Like some machines or applied systems!" +
+//						"\nThis will also prevent the player from interacting with the block's inventory!"
+//		);
 
 		for (RestrictionType type : RestrictionType.values()) {
 			long count = RESTRICTED_ITEMS.values().stream().filter(restrictedItem -> restrictedItem.getType() == type).count();
@@ -102,6 +110,15 @@ public class FFResSettings {
 	public static @Nullable RestrictedItem getRestrictedItem(ItemStack itemStack){
 		for (RestrictedItem restrictedItem : RESTRICTED_ITEMS.get(itemStack.getType())) {
 			if (restrictedItem.match(itemStack)){
+				return restrictedItem;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable RestrictedItem getRestrictedItem(Block block){
+		for (RestrictedItem restrictedItem : RESTRICTED_ITEMS.get(block.getType())) {
+			if (restrictedItem.match(block)){
 				return restrictedItem;
 			}
 		}
