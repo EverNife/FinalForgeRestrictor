@@ -8,7 +8,9 @@ import br.com.finalcraft.evernifecore.protection.worldguard.FCWorldGuardRegion;
 import br.com.finalcraft.evernifecore.protection.worldguard.WGFlags;
 import br.com.finalcraft.evernifecore.protection.worldguard.WGPlatform;
 import br.com.finalcraft.evernifecore.protection.worldguard.adapter.FCRegionResultSet;
+import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
 import br.com.finalcraft.finalforgerestrictor.integration.worldguard.flags.ForgeResIgnoreFlag;
+import br.com.finalcraft.finalforgerestrictor.logging.FFRDebugModule;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.flags.StateFlag;
@@ -19,6 +21,8 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
+
+import java.util.stream.Collectors;
 
 public class WorldGuardHandler implements ProtectionHandler {
 
@@ -99,7 +103,13 @@ public class WorldGuardHandler implements ProtectionHandler {
 			return true;
 		}
 
-		if (regions.queryState(localPlayer, flag) != State.ALLOW){
+		StateFlag.State state = regions.queryState(localPlayer, flag);
+		FinalForgeRestrictor.getLog().debugModule(FFRDebugModule.WORLD_GUARD, () -> {
+			String allRegionNames = regions.getRegions().stream().map(FCWorldGuardRegion::getId).collect(Collectors.joining(", "));
+			return String.format("Checking flag %s for player %s at location %s, inside regions %s, with result state [%s]", flag.getName(), player.getName(), location, allRegionNames, state);
+		});
+
+		if (state != null && state != State.ALLOW){
 			YOU_DO_NOT_HAVE_PERMISSION_ON_THIS_AREA.send(player);
 			return false;
 		}
