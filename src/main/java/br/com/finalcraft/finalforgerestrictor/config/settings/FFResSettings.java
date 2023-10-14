@@ -40,7 +40,7 @@ public class FFResSettings {
 
 		loadRestrictedItems(
 				RestrictionType.WHITELIST,
-				"Items that this plugin will ignore! " +
+				"Items that this plugin will ignore!" +
 						"\nIf the player is holding an item from this list, this plugin will not confiscate his inventory!"
 		);
 
