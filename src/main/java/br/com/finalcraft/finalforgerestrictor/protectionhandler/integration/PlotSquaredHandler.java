@@ -1,15 +1,19 @@
 package br.com.finalcraft.finalforgerestrictor.protectionhandler.integration;
 
+import br.com.finalcraft.evernifecore.minecraft.vector.BlockPos;
+import br.com.finalcraft.evernifecore.vectors.CuboidSelection;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
 import com.intellectualcrafters.plot.PS;
 import com.intellectualcrafters.plot.object.Plot;
 import com.intellectualcrafters.plot.object.PlotArea;
+import com.intellectualcrafters.plot.object.RegionWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.util.Set;
 import java.util.UUID;
 
 public class PlotSquaredHandler  implements ProtectionHandler {
@@ -62,6 +66,38 @@ public class PlotSquaredHandler  implements ProtectionHandler {
 
 	@Override
 	public boolean canUseAoE(Player player, Location location, int range) {
+
+		CuboidSelection cuboidSelection = CuboidSelection.of(BlockPos.from(location)).expand(range);
+
+		RegionWrapper regionWrapper = new RegionWrapper(
+				cuboidSelection.getMinium().getX(),
+				cuboidSelection.getMinium().getZ(),
+				cuboidSelection.getMaximum().getX(),
+				cuboidSelection.getMaximum().getZ()
+		);
+
+		Set<PlotArea> plotAreas = PS.get().getPlotAreas(location.getWorld().getName(), regionWrapper);
+
+		//Not inside a plot, not on plot-world probably?
+		if (plotAreas.size() == 0){
+			return true;
+		}
+
+		//More than one plot present on the range, deny the action
+		if (plotAreas.size() != 1){
+			return false;
+		}
+
+		PlotArea plotArea = plotAreas.stream().findFirst().get();
+
+		//now make sure all 4 corners are inside the same plot
+		if (!plotArea.contains(cuboidSelection.getMinium().getX(), cuboidSelection.getMinium().getZ())
+				|| !plotArea.contains(cuboidSelection.getMinium().getX(), cuboidSelection.getMaximum().getZ())
+				|| !plotArea.contains(cuboidSelection.getMaximum().getX(), cuboidSelection.getMinium().getZ())
+				|| !plotArea.contains(cuboidSelection.getMaximum().getX(), cuboidSelection.getMaximum().getZ())) {
+			return false;
+		}
+
 		return true;
 	}
 
