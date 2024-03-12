@@ -33,7 +33,7 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
-    compileOnly 'br.com.finalcraft:EverNifeCore:2.0.3'
+    compileOnly 'br.com.finalcraft:EverNifeCore:2.0.4'
 
     compileOnly name: "battlegear2-1.2.0"
     compileOnly name: "GriefPrevention-16.17.1"
