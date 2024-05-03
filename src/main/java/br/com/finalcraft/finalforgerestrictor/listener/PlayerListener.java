@@ -49,6 +49,10 @@ public class PlayerListener implements ECListener {
 			return;
 		}
 
+		if (FCBukkitUtil.isFakePlayer(player)){
+			return;
+		}
+
 		if (!FFResSettings.isWorldEnabled(player.getWorld())){
 			return;
 		}
@@ -80,6 +84,10 @@ public class PlayerListener implements ECListener {
 
 		final Player player = event.getPlayer();
 		Block block = event.getClickedBlock();
+
+		if (FCBukkitUtil.isFakePlayer(player)){
+			return;
+		}
 
 		if (!FFResSettings.isWorldEnabled(player.getWorld())){
 			return;
@@ -174,6 +182,10 @@ public class PlayerListener implements ECListener {
 		if (event.getDamager().getType() == EntityType.PLAYER) {
 			final Player damager = (Player) event.getDamager();
 
+			if (FCBukkitUtil.isFakePlayer(damager)){
+				return;
+			}
+
 			if (!FFResSettings.isWorldEnabled(damager.getWorld())){
 				return;
 			}
@@ -202,6 +214,10 @@ public class PlayerListener implements ECListener {
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
 	public void onBlockPlace(BlockPlaceEvent event) {
 		final Player player = event.getPlayer();
+
+		if (FCBukkitUtil.isFakePlayer(player)){
+			return;
+		}
 
 		if (!FFResSettings.isWorldEnabled(player.getWorld())){
 			return;
