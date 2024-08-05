@@ -24,16 +24,31 @@ public class FFResSettings {
 	public static Multimap<Material, RestrictedItem> RESTRICTED_ITEMS = HashMultimap.create();
 	private static HashSet<String> ENABLED_WORLDS = new HashSet<>();
 
-	private static boolean allWorlds = true;
 	public static int confiscateTicks;
+	public static boolean ignoreFakePlayers = true;
+	private static boolean allWorlds = true;
 
 	public static void initialize() {
 		RESTRICTED_ITEMS.clear();
 
-		confiscateTicks = ConfigManager.getMainConfig().getOrSetDefaultValue("Settings.confiscateTicks", 3, "How much time will the player's inventory be confiscated!");
+		confiscateTicks = ConfigManager.getMainConfig().getOrSetDefaultValue(
+				"Settings.confiscateTicks",
+				3,
+				"How much time will the player's inventory be confiscated!"
+		);
+
+		ignoreFakePlayers = ConfigManager.getMainConfig().getOrSetDefaultValue(
+				"Settings.ignoreFakePlayers",
+				true,
+				"Should FakePlayers be ignored on the cancel-event system?"
+		);
 
 		ENABLED_WORLDS = new HashSet<>(
-				ConfigManager.getMainConfig().getOrSetDefaultValue("Settings.worlds", Arrays.asList("*"), "Worlds this plugin will protected! The '*' means all Worlds!")
+				ConfigManager.getMainConfig().getOrSetDefaultValue(
+						"Settings.worlds",
+						Arrays.asList("*"),
+						"Worlds this plugin will protected! The '*' means all Worlds!"
+				)
 		);
 		allWorlds = ENABLED_WORLDS.contains("*");
 
