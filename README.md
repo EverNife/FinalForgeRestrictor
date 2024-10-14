@@ -4,6 +4,10 @@ Improved protection for modded servers.
 
 This is a remake of KaiKikuchi's ForgeRestrictor!
 
+<p align="center">
+  <img src="https://bstats.org/signatures/bukkit/FinalForgeRestrictor.svg" />
+</p>
+
 ## Compatibility
 
 Curently supports :
