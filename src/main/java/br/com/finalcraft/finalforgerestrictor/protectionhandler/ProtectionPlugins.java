@@ -41,14 +41,19 @@ public class ProtectionPlugins {
 
 	public static <H extends ProtectionHandler> @Nullable H addProtectionHandler(String pluginName, Supplier<H> supplier){
 		if (Bukkit.getPluginManager().isPluginEnabled(pluginName) && ConfigManager.getMainConfig().getOrSetDefaultValue("ProtectionIntegration." + pluginName, true)){
-			H handler = supplier.get();
-			ALL_ENABLED_HANDLERS.add(handler);
+			try {
+				H handler = supplier.get();
+				ALL_ENABLED_HANDLERS.add(handler);
 
-			//Load Locales
-			JavaPlugin javaPlugin = JavaPlugin.getProvidingPlugin(handler.getClass()); //Maybe some third-part plugins want to add new ProtectionHandlers
-			FCLocaleManager.loadLocale(javaPlugin, true, handler.getClass());
+				//Load Locales
+				JavaPlugin javaPlugin = JavaPlugin.getProvidingPlugin(handler.getClass()); //Maybe some third-part plugins want to add new ProtectionHandlers
+				FCLocaleManager.loadLocale(javaPlugin, true, handler.getClass());
 
-			return handler;
+				return handler;
+			}catch (Throwable e){
+				FinalForgeRestrictor.getLog().severe("Failed to load ProtectionHandler: " + pluginName);
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
