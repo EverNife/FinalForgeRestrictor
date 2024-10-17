@@ -3,10 +3,7 @@ package br.com.finalcraft.finalforgerestrictor.protectionhandler;
 import br.com.finalcraft.evernifecore.locale.FCLocaleManager;
 import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
 import br.com.finalcraft.finalforgerestrictor.config.ConfigManager;
-import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.GriefPreventionHandler;
-import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.GriefPreventionPlusHandler;
-import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.PlotSquaredHandler;
-import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.WorldGuardHandler;
+import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,6 +18,7 @@ public class ProtectionPlugins {
 	public static GriefPreventionHandler GriefPrevention;
 	public static WorldGuardHandler WorldGuard;
 	public static PlotSquaredHandler PlotSquared;
+	public static IridiumSkyBlockHandler IridiumSkyBlock;
 	private static final List<ProtectionHandler> ALL_ENABLED_HANDLERS = new ArrayList<>();
 
 	public static void initialize(){
@@ -30,6 +28,7 @@ public class ProtectionPlugins {
 		GriefPrevention 	= addProtectionHandler("GriefPrevention", GriefPreventionHandler::new);
 		WorldGuard 			= addProtectionHandler("WorldGuard", WorldGuardHandler::new);
 		PlotSquared 		= addProtectionHandler("PlotSquared", PlotSquaredHandler::new);
+		IridiumSkyBlock 	= addProtectionHandler("IridiumSkyBlock", IridiumSkyBlockHandler::new);
 
 		ConfigManager.getMainConfig().setComment("ProtectionIntegration", "List of plugins FinalForgeRestrictor will look up to enchance protection!");
 		ConfigManager.getMainConfig().saveIfNewDefaults();

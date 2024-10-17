@@ -8,7 +8,7 @@ buildscript {
 }
 
 group 'br.com.finalcraft'
-version '2.0.4'
+version '2.0.5'
 
 apply plugin: 'java'
 
@@ -39,6 +39,7 @@ dependencies {
     compileOnly name: "GriefPreventionPlus-13.4"
     compileOnly name: "worldguard-bukkit-7.0.5-dist"    //Up to 1.16
     compileOnly name: "worldedit-bukkit-7.2.5-dist"     //Up to 1.16
+    compileOnly name: "IridiumSkyblock-4.0.9.1"
     compileOnly name: "PlotSquared-Bukkit-20.03.28-71943e6-796"
 
     compileOnly group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'

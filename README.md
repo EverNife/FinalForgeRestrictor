@@ -15,11 +15,13 @@ Curently supports :
  - **GriefPreventionPlus** (On 1.7.10 and 1.12.2)
  - **PlotSquared** (On all versions)
  - **GriefPrevention** (only 1.16.5)
+ - **IridiumSkyblock** (tested 1.20.1)
 
 MCvesions:
  - Minecraft 1.7.10 *(requires Crucible)*
  - MineCraft 1.12.2 *(tested on Mohist)*
  - Minecraft 1.16.5 *(tested on CatServer and Archlight)*
+ - Minecraft 1.20.1 *(tested on Mohist)*
 
 ## Requirements
 
