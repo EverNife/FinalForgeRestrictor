@@ -13,14 +13,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @ECPlugin(
-		bstatsID = "17169",
-		debugModuleEnum = FFRDebugModule.class
+		bstatsID = "17169"
 )
 public class FinalForgeRestrictor extends JavaPlugin {
 
 	public static FinalForgeRestrictor instance;
 
-	private final ECLogger ecLogger = new ECLogger(this);
+	private final ECLogger<FFRDebugModule> ecLogger = new ECLogger(this, FFRDebugModule.values());
 
 	public static ECLogger<FFRDebugModule> getLog(){
 		return instance.ecLogger;

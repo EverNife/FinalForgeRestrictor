@@ -3,8 +3,8 @@ package br.com.finalcraft.finalforgerestrictor.logging;
 import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 
 public enum FFRDebugModule implements IDebugModule {
-    ITEM_REGISTRATION("Log each item Registration!"),
-    WORLD_GUARD("Debug related to WorldGuard!", false),
+    ITEM_REGISTRATION("Log each item Registration!", true),
+    WORLD_GUARD("Debug related to WorldGuard!", true),
     ;
 
     private final String comment;
