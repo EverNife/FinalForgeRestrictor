@@ -1,6 +1,6 @@
 name: FinalForgeRestrictor
 main: br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor
-version: 2.0.5
+version: 2.0.6
 author: [EverNife]
 depend: [EverNifeCore]
 softdepend: [GriefPreventionPlus, GriefPrevention, WorldGuard, PlotSquared, IridiumSkyblock, SuperiorSkyblock2]
