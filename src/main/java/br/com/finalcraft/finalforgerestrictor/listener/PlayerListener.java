@@ -93,46 +93,52 @@ public class PlayerListener implements ECListener {
 			return;
 		}
 
-		final ItemStack heldItem = event.getItem() != null
-				? event.getItem()
-				: FCBukkitUtil.getPlayersHeldItem(player);
-
-		// if not holding anything, just ignore
-		if (heldItem == null || heldItem.getType() == Material.AIR){
-			return;
-		}
-
 		//Ignore if the player has correct permission
 		if (player.hasPermission(PermissionNodes.BYPASS_RESTRICTIONS)){
 			return;
 		}
 
-		// ignore heads
-		if (FCMaterialUtil.isHead(heldItem.getType())){
-			return;
-		}
+		final ItemStack heldItem = event.getItem() != null
+				? event.getItem()
+				: FCBukkitUtil.getPlayersHeldItem(player);
 
-		// ignore all vanilla items and edible items actions into vanilla blocks or air
-		if ((heldItem.getType().isEdible() || FCMaterialUtil.isVanilla(heldItem.getType()))
-				&& (block == null || FCMaterialUtil.isVanilla(block.getType()))) {
-			return;
-		}
+		if (FFResSettings.ignoreVanillaToVanillaInteractions == true){
+			// if not holding anything, just ignore
+			if (heldItem == null || heldItem.getType() == Material.AIR){
+				return;
+			}
 
-		// ignore investigation tool on GPP
-		if (ProtectionPlugins.GriefPreventionPlus != null){
-			if (heldItem.getType() == GriefPreventionPlus.getInstance().config.claims_investigationTool) {
+			// ignore heads
+			if (FCMaterialUtil.isHead(heldItem.getType())){
+				return;
+			}
+
+			// ignore all vanilla items and edible items actions into vanilla blocks or air
+			if ((heldItem.getType().isEdible() || FCMaterialUtil.isVanilla(heldItem.getType()))
+					&& (block == null || FCMaterialUtil.isVanilla(block.getType()))) {
 				return;
 			}
 		}
 
-		// ignore investigation tool on GP
-		if (ProtectionPlugins.GriefPrevention != null){
-			if (heldItem.getType() == GriefPrevention.instance.config_claims_investigationTool) {
-				return;
+		if (heldItem != null){
+			// ignore investigation tool on GPP
+			if (ProtectionPlugins.GriefPreventionPlus != null){
+				if (heldItem.getType() == GriefPreventionPlus.getInstance().config.claims_investigationTool) {
+					return;
+				}
+			}
+
+			// ignore investigation tool on GP
+			if (ProtectionPlugins.GriefPrevention != null){
+				if (heldItem.getType() == GriefPrevention.instance.config_claims_investigationTool) {
+					return;
+				}
 			}
 		}
 
-		RestrictedItem restrictedItem = FFResSettings.getRestrictedItem(heldItem);
+		RestrictedItem restrictedItem = heldItem != null
+				? FFResSettings.getRestrictedItem(heldItem)
+				: null;
 
 		// Check for Whitelisted Items
 		if (restrictedItem != null && restrictedItem.getType() == RestrictionType.WHITELIST){
@@ -157,7 +163,7 @@ public class PlayerListener implements ECListener {
 		//When hitting the AIR, check if item is RANGED RESTRICTED
 		if (block == null && restrictedItem != null && restrictedItem.getType() == RestrictionType.RANGED) {
 			// This is really not precise, if the player is targeting the AIR, this will just not work :/
-			// But waterver, it was this way before, it doesn't matter at all :/
+			// But whatever, it was this way before, it doesn't matter at all :/
 			block = FCBukkitUtil.getTargetBlock(player, restrictedItem.getRange());
 		}
 

@@ -26,6 +26,7 @@ public class FFResSettings {
 
 	public static int confiscateTicks;
 	public static boolean ignoreFakePlayers = true;
+	public static boolean ignoreVanillaToVanillaInteractions = true;
 	private static boolean allWorlds = true;
 
 	public static void initialize() {
@@ -41,6 +42,17 @@ public class FFResSettings {
 				"Settings.ignoreFakePlayers",
 				true,
 				"Should FakePlayers be ignored on the cancel-event system?"
+		);
+
+		ignoreVanillaToVanillaInteractions = ConfigManager.getMainConfig().getOrSetDefaultValue(
+				"Settings.ignoreVanillaToVanillaInteractions",
+				true,
+				"Should Vanilla to Vanilla interactions be ignored on the cancel-event system?" +
+						"\nUsually normal protections plugins already handle these cases so we disable" +
+						"\nthese checks to improve performance!" +
+						"\n" +
+						"\nBut in some cases, some servers-core might behave differently and you might" +
+						"\nwant to enable this extra protection!"
 		);
 
 		ENABLED_WORLDS = new HashSet<>(
