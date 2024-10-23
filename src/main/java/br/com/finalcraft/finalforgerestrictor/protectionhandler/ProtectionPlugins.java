@@ -19,6 +19,7 @@ public class ProtectionPlugins {
 	public static WorldGuardHandler WorldGuard;
 	public static PlotSquaredHandler PlotSquared;
 	public static IridiumSkyBlockHandler IridiumSkyBlock;
+	public static SuperiorSkyBlockHandler SuperiorSkyBlock;
 	private static final List<ProtectionHandler> ALL_ENABLED_HANDLERS = new ArrayList<>();
 
 	public static void initialize(){
@@ -29,6 +30,7 @@ public class ProtectionPlugins {
 		WorldGuard 			= addProtectionHandler("WorldGuard", WorldGuardHandler::new);
 		PlotSquared 		= addProtectionHandler("PlotSquared", PlotSquaredHandler::new);
 		IridiumSkyBlock 	= addProtectionHandler("IridiumSkyBlock", IridiumSkyBlockHandler::new);
+		SuperiorSkyBlock 	= addProtectionHandler("SuperiorSkyBlock", SuperiorSkyBlockHandler::new);
 
 		ConfigManager.getMainConfig().setComment("ProtectionIntegration", "List of plugins FinalForgeRestrictor will look up to enchance protection!");
 		ConfigManager.getMainConfig().saveIfNewDefaults();

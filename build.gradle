@@ -37,9 +37,10 @@ dependencies {
 
     compileOnly name: "GriefPrevention-16.17.1"
     compileOnly name: "GriefPreventionPlus-13.4"
-    compileOnly name: "worldguard-bukkit-7.0.5-dist"    //Up to 1.16
-    compileOnly name: "worldedit-bukkit-7.2.5-dist"     //Up to 1.16
-    compileOnly name: "IridiumSkyblock-4.0.9.1"
+    compileOnly name: "worldguard-bukkit-7.0.5-dist"
+    compileOnly name: "worldedit-bukkit-7.2.5-dist"
+    compileOnly name: "IridiumSkyblock-4.0.9.1"         // 1.16.5+
+    compileOnly name: "SuperiorSkyblock2-2024.1"        // 1.16.5+
     compileOnly name: "PlotSquared-Bukkit-20.03.28-71943e6-796"
 
     compileOnly group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
