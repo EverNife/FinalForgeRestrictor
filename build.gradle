@@ -47,4 +47,10 @@ dependencies {
     compileOnly group: 'commons-io', name: 'commons-io', version: '2.6' //Necessary for ReflectionUtils
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
