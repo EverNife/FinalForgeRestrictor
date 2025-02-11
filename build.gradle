@@ -42,6 +42,7 @@ dependencies {
     compileOnly name: "IridiumSkyblock-4.0.9.1"         // 1.16.5+
     compileOnly name: "SuperiorSkyblock2-2024.1"        // 1.16.5+
     compileOnly name: "PlotSquared-Bukkit-20.03.28-71943e6-796"
+    compileOnly name: "FactionsUUID"                    // 1.8+
 
     compileOnly group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     compileOnly group: 'commons-io', name: 'commons-io', version: '2.6' //Necessary for ReflectionUtils

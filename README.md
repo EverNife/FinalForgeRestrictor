@@ -17,6 +17,7 @@ Curently supports :
  - **GriefPrevention** (only 1.16.5)
  - **IridiumSkyblock** (tested 1.20.1)
  - **SuperiorSkyblock2** (tested 1.20.1)
+ - **FactionsUUID** (tested 1.16.5)
 
 MCvesions:
  - Minecraft 1.7.10 *(requires Crucible)*
