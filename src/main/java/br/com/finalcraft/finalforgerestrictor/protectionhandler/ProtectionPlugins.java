@@ -25,12 +25,14 @@ public class ProtectionPlugins {
 	public static void initialize(){
 		ALL_ENABLED_HANDLERS.clear();
 
-		GriefPreventionPlus = addProtectionHandler("GriefPreventionPlus", GriefPreventionPlusHandler::new);
-		GriefPrevention 	= addProtectionHandler("GriefPrevention", GriefPreventionHandler::new);
-		WorldGuard 			= addProtectionHandler("WorldGuard", WorldGuardHandler::new);
-		PlotSquared 		= addProtectionHandler("PlotSquared", PlotSquaredHandler::new);
-		IridiumSkyBlock 	= addProtectionHandler("IridiumSkyBlock", IridiumSkyBlockHandler::new);
-		SuperiorSkyBlock 	= addProtectionHandler("SuperiorSkyBlock", SuperiorSkyBlockHandler::new);
+		FinalForgeRestrictor.getLog().info("Initializing ProtectionHandlers...");
+
+		GriefPreventionPlus = addProtectionHandler("GriefPreventionPlus", () -> new GriefPreventionPlusHandler());
+		GriefPrevention 	= addProtectionHandler("GriefPrevention", () -> new GriefPreventionHandler());
+		WorldGuard 			= addProtectionHandler("WorldGuard", () -> new WorldGuardHandler());
+		PlotSquared 		= addProtectionHandler("PlotSquared", () -> new PlotSquaredHandler());
+		IridiumSkyBlock 	= addProtectionHandler("IridiumSkyBlock", () -> new IridiumSkyBlockHandler());
+		SuperiorSkyBlock 	= addProtectionHandler("SuperiorSkyBlock", () -> new SuperiorSkyBlockHandler());
 
 		ConfigManager.getMainConfig().setComment("ProtectionIntegration", "List of plugins FinalForgeRestrictor will look up to enchance protection!");
 		ConfigManager.getMainConfig().saveIfNewDefaults();
@@ -50,10 +52,12 @@ public class ProtectionPlugins {
 				JavaPlugin javaPlugin = JavaPlugin.getProvidingPlugin(handler.getClass()); //Maybe some third-part plugins want to add new ProtectionHandlers
 				FCLocaleManager.loadLocale(javaPlugin, true, handler.getClass());
 
+				FinalForgeRestrictor.getLog().info(" - ProtectionHandler loaded: " + pluginName);
+
 				return handler;
-			}catch (Throwable e){
+			}catch (Throwable t){
 				FinalForgeRestrictor.getLog().severe("Failed to load ProtectionHandler: " + pluginName);
-				e.printStackTrace();
+				t.printStackTrace();
 			}
 		}
 		return null;
