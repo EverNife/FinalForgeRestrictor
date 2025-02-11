@@ -29,16 +29,18 @@ public class FinalForgeRestrictor extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 
-		FCScheduler.scheduleSyncInTicks(() -> {
-			getLog().info("Registering Commands...");
-			CommandRegisterer.registerCommands(this);
+		getLog().info("Registering Commands...");
+		CommandRegisterer.registerCommands(this);
 
+		getLog().info("Registering Listeners...");
+		ECListener.register(this, PlayerListener.class);
+
+		FCScheduler.scheduleSyncInTicks(() -> {
 			getLog().info("Loading Configuration...");
 			ConfigManager.initialize(this);
 
-			ECListener.register(this, PlayerListener.class);
-
 			if (Bukkit.getPluginManager().isPluginEnabled("WorldGuard")){
+				getLog().info("Creating WorldGuard flag: 'fres-ignore'");
 				WorldGuardIntegration.initialize();
 			}
 		}, 1);
