@@ -49,6 +49,12 @@ public class PlayerListener implements ECListener {
 			return;
 		}
 
+		RestrictedItem restrictedBlock = FFResSettings.getRestrictedItem(block);
+
+		if (restrictedBlock != null && restrictedBlock.getType() == RestrictionType.WHITELIST){
+			return;
+		}
+
 		if (FFResSettings.ignoreFakePlayers && FCBukkitUtil.isFakePlayer(player)){
 			return;
 		}
@@ -158,6 +164,15 @@ public class PlayerListener implements ECListener {
 				}
 			}
 			return;
+		}
+
+		//Check if block is whitelisted
+		if (block != null){
+			RestrictedItem restrictedBlock = FFResSettings.getRestrictedItem(block);
+
+			if (restrictedBlock != null && restrictedBlock.getType() == RestrictionType.WHITELIST){
+				return;
+			}
 		}
 
 		//When hitting the AIR, check if item is RANGED RESTRICTED
