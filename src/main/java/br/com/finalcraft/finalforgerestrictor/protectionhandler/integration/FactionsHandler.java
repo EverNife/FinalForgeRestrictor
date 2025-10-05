@@ -7,6 +7,8 @@ import br.com.finalcraft.evernifecore.locale.LocaleType;
 import br.com.finalcraft.evernifecore.minecraft.vector.BlockPos;
 import br.com.finalcraft.evernifecore.minecraft.vector.ChunkPos;
 import br.com.finalcraft.evernifecore.vectors.CuboidSelection;
+import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
+import br.com.finalcraft.finalforgerestrictor.logging.FFRDebugModule;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
 import com.massivecraft.factions.*;
 import com.massivecraft.factions.listeners.FactionsBlockListener;
@@ -29,29 +31,51 @@ public class FactionsHandler implements ProtectionHandler {
 	@FCLocale(lang = LocaleType.PT_BR, text = "§e§l ▶ §cYou are to close to a faction to do that!!")
 	private static LocaleMessage YOU_ARE_TOO_CLOSE_TO_A_FACTION;
 
-	@Override
-	public boolean canBuild(Player player, Location location) {
+	private boolean checkIfWorldHasFactionsDisabledOrIfThePlayerCanBuildThere(Player player, Location location) {
+
+		if (!FactionsPlugin.getInstance().worldUtil().isEnabled(location.getWorld())){
+			return true; // World is disabled so it's not a faction world, allow the action
+		}
+
+		boolean canBuildDestroyBlock = FactionsBlockListener.playerCanBuildDestroyBlock(player, location, PermissibleActions.BUILD, true);
+
+		FinalForgeRestrictor.getLog().debugModule(FFRDebugModule.FACTIONS, () -> {
+			Faction factionAt = Board.getInstance().getFactionAt(new FLocation(location));
+
+			return String.format("Checking canBreakBuild for player %s at location %s, inside faction %s, with result [%s]",
+					player.getName(),
+					location,
+					factionAt.isWilderness() ? "Wilderness" : factionAt.getTag(),
+					canBuildDestroyBlock
+			);
+		});
+
 		return FactionsBlockListener.playerCanBuildDestroyBlock(player, location, PermissibleActions.BUILD, true);
 	}
 
 	@Override
+	public boolean canBuild(Player player, Location location) {
+		return checkIfWorldHasFactionsDisabledOrIfThePlayerCanBuildThere(player, location);
+	}
+
+	@Override
 	public boolean canAccess(Player player, Location location) {
-		return canBuild(player, location);
+		return checkIfWorldHasFactionsDisabledOrIfThePlayerCanBuildThere(player, location);
 	}
 
 	@Override
 	public boolean canUse(Player player, Location location) {
-		return canBuild(player, location);
+		return checkIfWorldHasFactionsDisabledOrIfThePlayerCanBuildThere(player, location);
 	}
 	
 	@Override
 	public boolean canOpenContainer(Player player, Block block) {
-		return canBuild(player, block.getLocation());
+		return checkIfWorldHasFactionsDisabledOrIfThePlayerCanBuildThere(player, block.getLocation());
 	}
 
 	@Override
 	public boolean canInteract(Player player, Location location) {
-		return this.canBuild(player, location);
+		return this.checkIfWorldHasFactionsDisabledOrIfThePlayerCanBuildThere(player, location);
 	}
 
 	@Override
@@ -61,11 +85,15 @@ public class FactionsHandler implements ProtectionHandler {
 
 	@Override
 	public boolean canProjectileHit(Player player, Location location) {
-		return this.canBuild(player, location);
+		return this.checkIfWorldHasFactionsDisabledOrIfThePlayerCanBuildThere(player, location);
 	}
 	
 	@Override
 	public boolean canUseAoE(Player player, Location location, int range) {
+
+		if (!FactionsPlugin.getInstance().worldUtil().isEnabled(location.getWorld())){
+			return true; // World is disabled so it's not a faction world, allow the action
+		}
 
 		List<FactionNearChunk> factionsNearChunk = getFactionsNearChunk(location, range);
 

@@ -5,6 +5,7 @@ import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 public enum FFRDebugModule implements IDebugModule {
     ITEM_REGISTRATION("Log each item Registration!", true),
     WORLD_GUARD("Debug related to WorldGuard!", true),
+    FACTIONS("Debug related to Factions!", true),
     ;
 
     private final String comment;
