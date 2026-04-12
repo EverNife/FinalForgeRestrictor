@@ -1,0 +1,16 @@
+group 'br.com.finalcraft'
+version 'dont-matter'
+
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
+    }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+}

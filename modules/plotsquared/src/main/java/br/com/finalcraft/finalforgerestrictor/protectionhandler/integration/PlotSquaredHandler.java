@@ -3,27 +3,32 @@ package br.com.finalcraft.finalforgerestrictor.protectionhandler.integration;
 import br.com.finalcraft.evernifecore.minecraft.vector.BlockPos;
 import br.com.finalcraft.evernifecore.vectors.CuboidSelection;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
-import com.intellectualcrafters.plot.PS;
-import com.intellectualcrafters.plot.object.Plot;
-import com.intellectualcrafters.plot.object.PlotArea;
-import com.intellectualcrafters.plot.object.RegionWrapper;
+import com.plotsquared.bukkit.util.BukkitUtil;
+import com.plotsquared.core.PlotSquared;
+import com.plotsquared.core.plot.Plot;
+import com.plotsquared.core.plot.PlotArea;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
-public class PlotSquaredHandler  implements ProtectionHandler {
+public class PlotSquaredHandler implements ProtectionHandler {
 
 	@Override
 	public boolean canBuild(Player player, Location location) {
 
-		com.intellectualcrafters.plot.object.Location pLocation = fromBukkit(location);
+		com.plotsquared.core.location.Location pLocation = fromBukkit(location);
 
-		PlotArea plotArea = PS.get().getApplicablePlotArea(pLocation);
+		PlotArea plotArea = PlotSquared.get().getPlotAreaManager().getPlotArea(pLocation);
 		if (plotArea != null){
 			Plot plot = plotArea.getPlot(pLocation);
 			if(plot != null){
@@ -69,14 +74,20 @@ public class PlotSquaredHandler  implements ProtectionHandler {
 
 		CuboidSelection cuboidSelection = CuboidSelection.of(BlockPos.from(location)).expand(range);
 
-		RegionWrapper regionWrapper = new RegionWrapper(
-				cuboidSelection.getMinium().getX(),
-				cuboidSelection.getMinium().getZ(),
-				cuboidSelection.getMaximum().getX(),
-				cuboidSelection.getMaximum().getZ()
+		Location minLoc = cuboidSelection.getMinium().getLocation(location.getWorld());
+		Location maxLoc = cuboidSelection.getMaximum().getLocation(location.getWorld());
+
+		com.plotsquared.core.location.Location plotMinLoc = BukkitUtil.adapt(minLoc);
+		com.plotsquared.core.location.Location plotMaxLoc = BukkitUtil.adapt(maxLoc);
+
+		CuboidRegion regionWrapper = new CuboidRegion(
+                new BukkitWorld(minLoc.getWorld()),
+				plotMinLoc.getBlockVector3(),
+				plotMaxLoc.getBlockVector3()
 		);
 
-		Set<PlotArea> plotAreas = PS.get().getPlotAreas(location.getWorld().getName(), regionWrapper);
+		Set<@NonNull PlotArea> plotAreas = Arrays.stream(PlotSquared.get().getPlotAreaManager().getPlotAreas(location.getWorld().getName(), regionWrapper))
+				.collect(Collectors.toSet());
 
 		//Not inside a plot, not on plot-world probably?
 		if (plotAreas.size() == 0){
@@ -101,8 +112,8 @@ public class PlotSquaredHandler  implements ProtectionHandler {
 		return true;
 	}
 
-	public com.intellectualcrafters.plot.object.Location fromBukkit(Location location){
-		return new com.intellectualcrafters.plot.object.Location(location.getWorld().getName(),location.getBlockX(),location.getBlockY(),location.getBlockZ(),location.getYaw(),location.getPitch());
+	public com.plotsquared.core.location.Location fromBukkit(Location location){
+		return BukkitUtil.adapt(location);
 	}
 
 	public boolean isTrusted(Plot plot, Player player){

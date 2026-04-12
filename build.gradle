@@ -1,57 +1,63 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        flatDir {
-            dirs 'libs'
+plugins {
+
+}
+
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'java-library'
+
+    group = 'br.com.finalcraft'
+    version = '2.1.0'
+
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    //This might keep function(parameter variable's Names) on the compiled jar
+    compileJava.options.compilerArgs.add '-parameters'
+    compileTestJava.options.compilerArgs.add '-parameters'
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    tasks.withType(Test).configureEach {
+        testLogging {
+            events = [TestLogEvent.PASSED, TestLogEvent.FAILED, TestLogEvent.SKIPPED]
+            exceptionFormat = TestExceptionFormat.FULL
+            showExceptions = true
+            showCauses = true
+            showStackTraces = true
         }
     }
-}
 
-group 'br.com.finalcraft'
-version '2.0.8'
-
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-compileJava.options.encoding = 'UTF-8'
-
-repositories {
-    flatDir {
-        dirs 'libs'
+    repositories {
+        mavenCentral()
+        maven { url = "https://jitpack.io" }
+        maven { url 'https://maven.petrus.dev/public' }
     }
-    mavenCentral()
-    maven {
-        name = 'spigotmc-repo'
-        url = 'https://hub.spigotmc.org/nexus/content/groups/public/'
+
+    dependencies {
+        compileOnly "br.com.finalcraft:EverNifeCore:2.0.4"
+
+        compileOnly "jakarta.annotation:jakarta.annotation-api:2.1.1"
+
+        //Lombok
+        compileOnly 'org.projectlombok:lombok:1.18.42'
+        annotationProcessor 'org.projectlombok:lombok:1.18.42'
+        testCompileOnly 'org.projectlombok:lombok:1.18.42'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
     }
-    maven {
-        url = 'https://maven.petrus.dev/public'
+
+    configurations.all {
+        attributes {
+            attribute(
+                    TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE,
+                    25
+            )
+        }
     }
-}
-
-dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
-    compileOnly 'br.com.finalcraft:EverNifeCore:2.0.4'
-
-    compileOnly name: "GriefPrevention-16.17.1"
-    compileOnly name: "GriefPreventionPlus-13.4"
-    compileOnly name: "worldguard-bukkit-7.0.5-dist"
-    compileOnly name: "worldedit-bukkit-7.2.5-dist"
-    compileOnly name: "IridiumSkyblock-4.0.9.1"         // 1.16.5+
-    compileOnly name: "SuperiorSkyblock2-2024.1"        // 1.16.5+
-    compileOnly name: "PlotSquared-Bukkit-20.03.28-71943e6-796"
-    compileOnly name: "FactionsUUID"                    // 1.8+
-
-    compileOnly group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
-    compileOnly group: 'commons-io', name: 'commons-io', version: '2.6' //Necessary for ReflectionUtils
-
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
-
-    //Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
-    testCompileOnly 'org.projectlombok:lombok:1.18.24'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 }

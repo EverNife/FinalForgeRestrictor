@@ -1,0 +1,56 @@
+plugins {
+    id("com.gradleup.shadow") version "8.3.8"
+}
+
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(8)
+    withSourcesJar()
+    withJavadocJar()
+}
+
+javadoc {
+    options.addStringOption('Xdoclint:-missing', '-quiet')
+}
+
+repositories {
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
+    }
+    flatDir {
+        dirs '../libs'
+    }
+}
+
+dependencies {
+    implementation project(':modules:common')
+    implementation project(':modules:plotsquared')
+
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+    compileOnly 'br.com.finalcraft:EverNifeCore:2.0.4'
+
+    compileOnly name: "GriefPrevention-16.17.1"
+    compileOnly name: "GriefPreventionPlus-13.4"
+    compileOnly name: "worldguard-bukkit-7.0.5-dist"
+    compileOnly name: "worldedit-bukkit-7.2.5-dist"
+    compileOnly name: "IridiumSkyblock-4.0.9.1"         // 1.16.5+
+    compileOnly name: "SuperiorSkyblock2-2024.1"        // 1.16.5+
+    compileOnly name: "FactionsUUID"                    // 1.8+
+
+    compileOnly group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    compileOnly group: 'commons-io', name: 'commons-io', version: '2.6' //Necessary for ReflectionUtils
+
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+shadowJar {
+    archiveBaseName.set("FinalForgeRestrictor")
+    archiveClassifier.set('')
+}
+
+artifacts {
+    archives shadowJar
+}

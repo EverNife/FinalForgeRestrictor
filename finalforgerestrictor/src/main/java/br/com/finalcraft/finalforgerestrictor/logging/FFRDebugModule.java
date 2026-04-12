@@ -1,6 +1,9 @@
 package br.com.finalcraft.finalforgerestrictor.logging;
 
+import br.com.finalcraft.evernifecore.logger.ECLogger;
 import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
+import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
+import org.bukkit.plugin.Plugin;
 
 public enum FFRDebugModule implements IDebugModule {
     ITEM_REGISTRATION("Log each item Registration!", true),
@@ -35,6 +38,16 @@ public enum FFRDebugModule implements IDebugModule {
     @Override
     public boolean isEnabledByDefault() {
         return enabledByDefault;
+    }
+
+    @Override
+    public Plugin getPlugin() {
+        return FinalForgeRestrictor.instance;
+    }
+
+    @Override
+    public ECLogger getLog() {
+        return FinalForgeRestrictor.getLog();
     }
 
     @Override

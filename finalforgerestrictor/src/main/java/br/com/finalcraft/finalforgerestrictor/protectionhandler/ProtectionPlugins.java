@@ -1,6 +1,7 @@
 package br.com.finalcraft.finalforgerestrictor.protectionhandler;
 
 import br.com.finalcraft.evernifecore.locale.FCLocaleManager;
+import br.com.finalcraft.evernifecore.util.FCReflectionUtil;
 import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
 import br.com.finalcraft.finalforgerestrictor.config.ConfigManager;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.*;
@@ -17,7 +18,7 @@ public class ProtectionPlugins {
 	public static GriefPreventionPlusHandler GriefPreventionPlus;
 	public static GriefPreventionHandler GriefPrevention;
 	public static WorldGuardHandler WorldGuard;
-	public static PlotSquaredHandler PlotSquared;
+	public static ProtectionHandler PlotSquared;
 	public static IridiumSkyBlockHandler IridiumSkyBlock;
 	public static SuperiorSkyBlockHandler SuperiorSkyBlock;
 	public static FactionsHandler Factions;
@@ -31,7 +32,7 @@ public class ProtectionPlugins {
 		GriefPreventionPlus = addProtectionHandler("GriefPreventionPlus", () -> new GriefPreventionPlusHandler());
 		GriefPrevention 	= addProtectionHandler("GriefPrevention", () -> new GriefPreventionHandler());
 		WorldGuard 			= addProtectionHandler("WorldGuard", () -> new WorldGuardHandler());
-		PlotSquared 		= addProtectionHandler("PlotSquared", () -> new PlotSquaredHandler());
+		PlotSquared 		= addProtectionHandler("PlotSquared", () -> (ProtectionHandler) FCReflectionUtil.getConstructor("br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.PlotSquaredHandler").invoke());
 		IridiumSkyBlock 	= addProtectionHandler("IridiumSkyBlock", () -> new IridiumSkyBlockHandler());
 		SuperiorSkyBlock 	= addProtectionHandler("SuperiorSkyBlock", () -> new SuperiorSkyBlockHandler());
 		Factions 			= addProtectionHandler("Factions", () -> new FactionsHandler());

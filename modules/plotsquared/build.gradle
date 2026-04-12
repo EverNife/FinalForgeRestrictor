@@ -1,0 +1,24 @@
+group 'br.com.finalcraft'
+version 'dont-matter'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+repositories {
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
+    }
+    flatDir {
+        dirs '../../libs'
+    }
+}
+
+dependencies {
+    compileOnly project(':modules:common')
+
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+
+    compileOnly name: "plotsquared-bukkit-7.5.12-downgraded"
+    compileOnly name: "worldguard-bukkit-7.0.5-dist"
+    compileOnly name: "worldedit-bukkit-7.2.5-dist"
+}
