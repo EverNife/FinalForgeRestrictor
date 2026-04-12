@@ -18,7 +18,7 @@ dependencies {
 
     compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
 
-    compileOnly name: "plotsquared-bukkit-7.5.12-downgraded"
+    compileOnly name: "plotsquared-bukkit-7.5.12-smaller"
     compileOnly name: "worldguard-bukkit-7.0.5-dist"
     compileOnly name: "worldedit-bukkit-7.2.5-dist"
 }
