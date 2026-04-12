@@ -13,7 +13,7 @@ This is a remake of KaiKikuchi's ForgeRestrictor!
 Curently supports :
  - **WorldGuard** (On all versions)
  - **GriefPreventionPlus** (On 1.7.10 and 1.12.2)
- - **PlotSquared** (On all versions)
+ - **PlotSquared** (tested 1.21.1)
  - **GriefPrevention** (only 1.16.5)
  - **IridiumSkyblock** (tested 1.20.1)
  - **SuperiorSkyblock2** (tested 1.20.1)
