@@ -1,5 +1,7 @@
 package br.com.finalcraft.finalforgerestrictor.protectionhandler;
 
+import br.com.finalcraft.evernifecore.logger.ECLogger;
+import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -17,11 +19,28 @@ import org.bukkit.entity.Player;
  * @see WorldGuardHandler
  * @see PlotSquaredHandler
  * */
-public interface ProtectionHandler {
+public abstract class ProtectionHandler {
+
+	private final ECLogger logger;
+	private final IDebugModule debugModule;
+
+	public ProtectionHandler(ECLogger logger, IDebugModule debugModule) {
+		this.logger = logger;
+		this.debugModule = debugModule;
+	}
+
+	public ECLogger getLog() {
+		return logger;
+	}
+
+	public IDebugModule getDebugModule() {
+		return debugModule;
+	}
+
 	/**
 	 * Returns the name of the protection plugin.
 	 * */
-	String getName();
+	public abstract String getName();
 	
 	/** 
 	 * Returns whether or not the player has build permission at
@@ -30,7 +49,7 @@ public interface ProtectionHandler {
 	 * @param	location	the location to check for build permission
 	 * @return				whether or not the player has permission to build at the location
 	 * */
-	boolean canBuild(Player player, Location location);
+	public abstract boolean canBuild(Player player, Location location);
 	
 	/** 
 	 * Returns whether or not the player has the permission to
@@ -39,7 +58,7 @@ public interface ProtectionHandler {
 	 * @param	location	the location to check for access permission
 	 * @return				whether or not the player has access permission at the target location
 	 * */
-	boolean canAccess(Player player, Location location);
+	public abstract boolean canAccess(Player player, Location location);
 	
 	/** 
 	 * Returns whether or not the player has the permission to use the
@@ -48,7 +67,7 @@ public interface ProtectionHandler {
 	 * @param	location	the location to check for use permission
 	 * @return				whether or not the player has use permission at the target location
 	 * */
-	boolean canUse(Player player, Location location);
+	public abstract boolean canUse(Player player, Location location);
 	
 	/** 
 	 * Returns whether or not the player has the permission to open the
@@ -59,7 +78,7 @@ public interface ProtectionHandler {
 	 * @return				whether or not the player can open the container
 	 * @see org.bukkit.inventory.InventoryHolder
 	 * */
-	boolean canOpenContainer(Player player, Block block);
+	public abstract boolean canOpenContainer(Player player, Block block);
 	
 	/** 
 	 * Returns whether or not the player has the permission to
@@ -68,7 +87,7 @@ public interface ProtectionHandler {
 	 * @param	location	the location to check for interact permission
 	 * @return				whether or not the player can with a block at the specified location
 	 * */
-	boolean canInteract(Player player, Location location);
+	public abstract boolean canInteract(Player player, Location location);
 
 	/** 
 	 * Returns whether or not the player has the permission to attack the specified entity.
@@ -77,7 +96,7 @@ public interface ProtectionHandler {
 	 * @return				whether or not the player can attack the entity
 	 * @see org.bukkit.entity.Entity
 	 * */
-	boolean canAttack(Player damager, Entity damaged);
+	public abstract boolean canAttack(Player damager, Entity damaged);
 	
 	/** 
 	 * Returns whether or not the player has the permission to hit the target
@@ -86,7 +105,7 @@ public interface ProtectionHandler {
 	 * @param	location	the target location being hit by a projectile shot by the player
 	 * @return				whether or not the player can hit the target location with a projectile
 	 * */
-	boolean canProjectileHit(Player player, Location location);
+	public abstract boolean canProjectileHit(Player player, Location location);
 	
 	/** 
 	 * Returns whether or not the player has the permission to use an Area of Effect item at
@@ -96,5 +115,5 @@ public interface ProtectionHandler {
 	 * @param	range		the range of the AoE item
 	 * @return				whether or not the player can use an AoE item at the target location
 	 * */
-	boolean canUseAoE(Player player, Location location, int range);
+	public abstract boolean canUseAoE(Player player, Location location, int range);
 }

@@ -1,5 +1,7 @@
 package br.com.finalcraft.finalforgerestrictor.protectionhandler.integration;
 
+import br.com.finalcraft.evernifecore.logger.ECLogger;
+import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 import br.com.finalcraft.evernifecore.minecraft.vector.BlockPos;
 import br.com.finalcraft.evernifecore.vectors.CuboidSelection;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
@@ -16,7 +18,11 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.List;
 
-public class IridiumSkyBlockHandler implements ProtectionHandler {
+public class IridiumSkyBlockHandler extends ProtectionHandler {
+
+	public IridiumSkyBlockHandler(ECLogger logger, IDebugModule debugModule) {
+		super(logger, debugModule);
+	}
 
 	@Override
 	public boolean canBuild(Player player, Location location) {

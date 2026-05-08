@@ -3,6 +3,8 @@ package br.com.finalcraft.finalforgerestrictor.protectionhandler.integration;
 import br.com.finalcraft.evernifecore.locale.FCLocale;
 import br.com.finalcraft.evernifecore.locale.LocaleMessage;
 import br.com.finalcraft.evernifecore.locale.LocaleType;
+import br.com.finalcraft.evernifecore.logger.ECLogger;
+import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 import br.com.finalcraft.evernifecore.minecraft.vector.BlockPos;
 import br.com.finalcraft.evernifecore.protection.worldguard.FCWorldGuardRegion;
 import br.com.finalcraft.evernifecore.protection.worldguard.WGFlags;
@@ -24,7 +26,11 @@ import org.bukkit.entity.Villager;
 
 import java.util.stream.Collectors;
 
-public class WorldGuardHandler implements ProtectionHandler {
+public class WorldGuardHandler extends ProtectionHandler {
+
+	public WorldGuardHandler(ECLogger logger, IDebugModule debugModule) {
+		super(logger, debugModule);
+	}
 
 	@FCLocale(lang = LocaleType.EN_US, text = "§e§l ▶ §cVocê não tem permissão nessa Região!")
 	@FCLocale(lang = LocaleType.PT_BR, text = "§e§l ▶ §cYou do not have permission on this Region!")

@@ -1,9 +1,12 @@
 package br.com.finalcraft.finalforgerestrictor.protectionhandler;
 
 import br.com.finalcraft.evernifecore.locale.FCLocaleManager;
+import br.com.finalcraft.evernifecore.logger.ECLogger;
+import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 import br.com.finalcraft.evernifecore.util.FCReflectionUtil;
 import br.com.finalcraft.finalforgerestrictor.FinalForgeRestrictor;
 import br.com.finalcraft.finalforgerestrictor.config.ConfigManager;
+import br.com.finalcraft.finalforgerestrictor.logging.FFRDebugModule;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,13 +32,13 @@ public class ProtectionPlugins {
 
 		FinalForgeRestrictor.getLog().info("Initializing ProtectionHandlers...");
 
-		GriefPreventionPlus = addProtectionHandler("GriefPreventionPlus", () -> new GriefPreventionPlusHandler());
-		GriefPrevention 	= addProtectionHandler("GriefPrevention", () -> new GriefPreventionHandler());
-		WorldGuard 			= addProtectionHandler("WorldGuard", () -> new WorldGuardHandler());
-		PlotSquared 		= addProtectionHandler("PlotSquared", () -> (ProtectionHandler) FCReflectionUtil.getConstructor("br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.PlotSquaredHandler").invoke());
-		IridiumSkyBlock 	= addProtectionHandler("IridiumSkyBlock", () -> new IridiumSkyBlockHandler());
-		SuperiorSkyBlock 	= addProtectionHandler("SuperiorSkyBlock", () -> new SuperiorSkyBlockHandler());
-		Factions 			= addProtectionHandler("Factions", () -> new FactionsHandler());
+		GriefPreventionPlus = addProtectionHandler("GriefPreventionPlus", () -> new GriefPreventionPlusHandler(FinalForgeRestrictor.getLog(), FFRDebugModule.GRIEF_PREVENTION_PLUS));
+		GriefPrevention 	= addProtectionHandler("GriefPrevention", () -> new GriefPreventionHandler(FinalForgeRestrictor.getLog(), FFRDebugModule.GRIEF_PREVENTION));
+		WorldGuard 			= addProtectionHandler("WorldGuard", () -> new WorldGuardHandler(FinalForgeRestrictor.getLog(), FFRDebugModule.WORLD_GUARD));
+		PlotSquared 		= addProtectionHandler("PlotSquared", () -> (ProtectionHandler) FCReflectionUtil.getConstructor("br.com.finalcraft.finalforgerestrictor.protectionhandler.integration.PlotSquaredHandler",ECLogger.class, IDebugModule.class).invoke(FinalForgeRestrictor.getLog(), FFRDebugModule.PLOT_SQUARED));
+		IridiumSkyBlock 	= addProtectionHandler("IridiumSkyBlock", () -> new IridiumSkyBlockHandler(FinalForgeRestrictor.getLog(), FFRDebugModule.IRIDIUM_SKY_BLOCK));
+		SuperiorSkyBlock 	= addProtectionHandler("SuperiorSkyBlock", () -> new SuperiorSkyBlockHandler(FinalForgeRestrictor.getLog(), FFRDebugModule.SUPERIOR_SKY_BLOCK));
+		Factions 			= addProtectionHandler("Factions", () -> new FactionsHandler(FinalForgeRestrictor.getLog(), FFRDebugModule.FACTIONS));
 
 		ConfigManager.getMainConfig().setComment("ProtectionIntegration", "List of plugins FinalForgeRestrictor will look up to enchance protection!");
 		ConfigManager.getMainConfig().saveIfNewDefaults();

@@ -7,7 +7,14 @@ import org.bukkit.plugin.Plugin;
 
 public enum FFRDebugModule implements IDebugModule {
     ITEM_REGISTRATION("Log each item Registration!", true),
+
+    //Protection Handlers
+    GRIEF_PREVENTION_PLUS("Debug related to GriefPreventionPlus!", true),
+    GRIEF_PREVENTION("Debug related to GriefPrevention!", true),
     WORLD_GUARD("Debug related to WorldGuard!", true),
+    PLOT_SQUARED("Debug related to PlotSquared!", true),
+    IRIDIUM_SKY_BLOCK("Debug related to IridiumSkyBlock!", true),
+    SUPERIOR_SKY_BLOCK("Debug related to SuperiorSkyBlock!", true),
     FACTIONS("Debug related to Factions!", true),
     ;
 

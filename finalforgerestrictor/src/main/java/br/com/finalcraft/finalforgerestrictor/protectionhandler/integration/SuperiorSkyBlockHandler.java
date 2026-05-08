@@ -1,5 +1,7 @@
 package br.com.finalcraft.finalforgerestrictor.protectionhandler.integration;
 
+import br.com.finalcraft.evernifecore.logger.ECLogger;
+import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 import br.com.finalcraft.evernifecore.minecraft.vector.BlockPos;
 import br.com.finalcraft.evernifecore.vectors.CuboidSelection;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
@@ -15,7 +17,11 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.List;
 
-public class SuperiorSkyBlockHandler implements ProtectionHandler {
+public class SuperiorSkyBlockHandler extends ProtectionHandler {
+
+	public SuperiorSkyBlockHandler(ECLogger logger, IDebugModule debugModule) {
+		super(logger, debugModule);
+	}
 
 	private boolean hasNoIslandOrHasPermission(Player player, Location location, IslandPrivilege privilege) {
 		Island island = SuperiorSkyblockAPI.getIslandAt(location);

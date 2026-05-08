@@ -3,6 +3,8 @@ package br.com.finalcraft.finalforgerestrictor.protectionhandler.integration;
 import br.com.finalcraft.evernifecore.locale.FCLocale;
 import br.com.finalcraft.evernifecore.locale.LocaleMessage;
 import br.com.finalcraft.evernifecore.locale.LocaleType;
+import br.com.finalcraft.evernifecore.logger.ECLogger;
+import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 import br.com.finalcraft.finalforgerestrictor.protectionhandler.ProtectionHandler;
 import net.kaikk.mc.gpp.Claim;
 import net.kaikk.mc.gpp.GriefPreventionPlus;
@@ -14,7 +16,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 
 
-public class GriefPreventionPlusHandler implements ProtectionHandler {
+public class GriefPreventionPlusHandler extends ProtectionHandler {
+
+	public GriefPreventionPlusHandler(ECLogger logger, IDebugModule debugModule) {
+		super(logger, debugModule);
+	}
 
 	@FCLocale(lang = LocaleType.EN_US, text = "§e§l ▶ §cVocê está muito perto de um Claim para fazer isso!")
 	@FCLocale(lang = LocaleType.PT_BR, text = "§e§l ▶ §cYou are to close to a claim to do that!!")

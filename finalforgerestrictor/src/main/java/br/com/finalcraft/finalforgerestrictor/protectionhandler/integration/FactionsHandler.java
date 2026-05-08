@@ -4,6 +4,8 @@ import br.com.finalcraft.evernifecore.cache.CacheableSupplier;
 import br.com.finalcraft.evernifecore.locale.FCLocale;
 import br.com.finalcraft.evernifecore.locale.LocaleMessage;
 import br.com.finalcraft.evernifecore.locale.LocaleType;
+import br.com.finalcraft.evernifecore.logger.ECLogger;
+import br.com.finalcraft.evernifecore.logger.debug.IDebugModule;
 import br.com.finalcraft.evernifecore.minecraft.vector.BlockPos;
 import br.com.finalcraft.evernifecore.minecraft.vector.ChunkPos;
 import br.com.finalcraft.evernifecore.vectors.CuboidSelection;
@@ -25,7 +27,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class FactionsHandler implements ProtectionHandler {
+public class FactionsHandler extends ProtectionHandler {
+
+	public FactionsHandler(ECLogger logger, IDebugModule debugModule) {
+		super(logger, debugModule);
+	}
 
 	@FCLocale(lang = LocaleType.EN_US, text = "§e§l ▶ §cVocê está muito perto de uma Faction para fazer isso!")
 	@FCLocale(lang = LocaleType.PT_BR, text = "§e§l ▶ §cYou are to close to a faction to do that!!")
